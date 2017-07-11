@@ -1,8 +1,8 @@
 const _ = require('lodash');
 var Promise = require('promise');
 
-const Twitter = require('./twitter');
-const Elasticsearch = require('./elasticsearch');
+const Twitter = require('../lib/twitter');
+const Elasticsearch = require('../lib/elasticsearch');
 
 const INDEX_NAME="tweets";
 const TYPE_NAME="tweet";
@@ -37,8 +37,8 @@ var storeTweets = (statuses) => {
 }
 
 module.exports = {
-  update: (search) => {
-    return getTweets(search).then(storeTweets);
+  update: (terms) => {
+    return getTweets(terms).then(storeTweets);
   }
 }
 

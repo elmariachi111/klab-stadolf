@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+require('dotenv').config();
+const TwitterPoll = require('../service/twitter_poll');
+
+require('yargs')
+    .usage('$0 <cmd> [args]')
+    .command('update [search]', 'reads tweets and updates index', {
+        search: {
+            describe: 'twitter search string'
+        }
+    }, (argv) => {
+        TwitterPoll.update(argv.search).then((res) => {
+            console.log(`indexed ${res.length} tweets`);
+        }, (err) => {
+            console.dir(err);
+        });
+    })
+    .help()
+    .argv
